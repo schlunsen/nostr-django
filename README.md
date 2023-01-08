@@ -1,7 +1,7 @@
 nostr-django
 ------------
 
-A service for managing nip-05 users for a given domain. Comes with a django admin app for managing users.
+A service for managing [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) users for a given domain. Comes with a django admin app for managing users.
 
 ## Setup
 ```
