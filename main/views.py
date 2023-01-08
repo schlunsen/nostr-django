@@ -23,3 +23,5 @@ def well_known(request):
 
         }
     return JsonResponse(data, safe=False)
+
+

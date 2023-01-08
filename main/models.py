@@ -17,3 +17,14 @@ class Relay(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class Payment(models.Model):
+    username = models.CharField(max_length=100)
+    lnurl = models.CharField(max_length=500)
+    paid_at = models.DateTimeField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.username
+    
+    
