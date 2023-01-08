@@ -18,6 +18,8 @@ pip3 install -r requirements.txt
 
 ```
 
+![Django admin for nostr-django](docs/nostr-django.png "Django admin")
+
 
 
 ```
