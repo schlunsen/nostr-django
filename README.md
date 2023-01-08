@@ -32,3 +32,4 @@ https://bekindorrewind.com/.well-known/nostr.json?name=jack
 
 ## Todo
 - [ ] Create integration with Lighting network and make routes for paying users
+- [ ] Make docker build
