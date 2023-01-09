@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.http import JsonResponse
 from .models import Nip05User, Wallet, Payment
 from .serializers import Nip05UserSerializer
@@ -18,6 +19,8 @@ def create_registration(request):
         "lnurl": payment.lnurl,
         "amount": amount,
         "management_code": payment.management_code,
+        "domain": settings.DOMAIN,
+        "username": payment.username
     }
     return JsonResponse(data, safe=False)
 
