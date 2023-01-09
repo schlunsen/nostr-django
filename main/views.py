@@ -40,6 +40,9 @@ def well_known(request):
         "names": names_dict
     }
     if name and users:
+        p = Payment.objects.filter(username=name).filter(paid_at__isnull=True).last()
+        if p:
+            p.confirm_payment()
         data['relays'] = {
             users.first().pub_key: [x.url for x in users.first().relays.all()]
 
