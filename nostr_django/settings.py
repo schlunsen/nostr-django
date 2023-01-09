@@ -18,6 +18,12 @@ DOMAIN = os.getenv('DOMAIN', 'http://localhost:8000')
 ALLOWED_HOSTS = ['{}'.format(DOMAIN),]
 CSRF_TRUSTED_ORIGINS = ['https://{}'.format(DOMAIN),]
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
+
 
 # Application definition
 
