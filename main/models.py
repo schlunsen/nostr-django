@@ -35,6 +35,7 @@ def generate_management_code():
 
 class Payment(models.Model):
     username = models.CharField(max_length=100)
+    pub_key = models.CharField(max_length=300)
     lnurl = models.CharField(max_length=500, blank=True, null=True)
     paid_at = models.DateTimeField(blank=True, null=True)
     management_code = models.CharField(blank=True, null=True, default=generate_management_code(), max_length=50)
@@ -48,10 +49,21 @@ class Payment(models.Model):
             amount=amount, description='Bekindorrewind donation')
         self.lnurl = invoice['pay_req']
         self.save()
+        
+    def generate_user(self):
+        if not Nip05User.objects.filter(name=self.username).count():
+            user = Nip05User.objects.create(name=self.username, pub_key=self.pub_key)
 
     def confirm_payment(self):
         wallet = Wallet(self.wallet.wallet_export)
-        wallet.list_invoices()
+        invoices =  wallet.get_invoices()
+        
+        for invoice in invoices:
+            if invoice['pay_req'] == self.lnurl and invoice['ispaid']:
+                self.paid_at = datetime.now()
+                self.save()
+                self.generate_user()
+                return
         self.paid_at = datetime.now()
         self.save()
 
