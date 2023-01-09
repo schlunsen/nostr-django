@@ -1,7 +1,25 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Nip05User
+from .models import Nip05User, Wallet, Payment
 from .serializers import Nip05UserSerializer
+from django.views.decorators.csrf import csrf_exempt
+
+
+
+@csrf_exempt    
+def create_registration(request):
+    username = request.POST.get('username', "test") 
+    wallet = Wallet.objects.first()
+    amount = 2500
+    payment = Payment.objects.create(username=username, wallet=wallet)
+    payment.generate_invoice(amount=amount)
+    data = {
+        "payment_id": payment.id,
+        "lnurl": payment.lnurl,
+        "amount": amount,
+        "management_code": payment.management_code,
+    }
+    return JsonResponse(data, safe=False)
 
 
 def well_known(request):

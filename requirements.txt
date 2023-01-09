@@ -1,3 +1,5 @@
 Django
 djangorestframework
 django-extensions
+lndhub
+django-cors-headers
