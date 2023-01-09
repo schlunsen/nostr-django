@@ -64,7 +64,7 @@ class Payment(models.Model):
                 self.save()
                 self.generate_user()
                 return
-        self.paid_at = datetime.now()
+        
         self.save()
 
     def __str__(self):
