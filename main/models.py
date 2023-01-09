@@ -55,7 +55,7 @@ class Payment(models.Model):
             user = Nip05User.objects.create(name=self.username, pub_key=self.pub_key)
 
     def confirm_payment(self):
-        wallet = Wallet(self.wallet.wallet_export)
+        wallet = LNDHubWallet(self.wallet.wallet_export)
         invoices =  wallet.get_invoices()
         
         for invoice in invoices:
