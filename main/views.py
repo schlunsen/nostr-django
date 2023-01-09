@@ -13,7 +13,6 @@ def create_registration(request):
     pub_key = request.POST.get('pub_key', "test") 
     wallet = Wallet.objects.first()
     amount = 2500
-    import pdb; pdb.set_trace()
     payment = Payment.objects.create(username=username, pub_key=pub_key, wallet=wallet)
     payment.generate_invoice(amount=amount)
     data = {
