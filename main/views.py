@@ -28,7 +28,7 @@ def create_registration(request):
 
 def well_known(request):
     users = Nip05User.objects.all()
-    name = request.GET.get('name')
+    name = request.GET.get('name',)
     if name:
         users = users.filter(name=name)
 
@@ -39,7 +39,7 @@ def well_known(request):
     data = {
         "names": names_dict
     }
-    if name:
+    if name and users:
         data['relays'] = {
             users.first().pub_key: [x.url for x in users.first().relays.all()]
 
