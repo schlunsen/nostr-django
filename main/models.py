@@ -75,7 +75,7 @@ class Payment(models.Model):
                 self.generate_user()
                 return
         
-        self.save()
+        
 
     def __str__(self):
         return self.username
