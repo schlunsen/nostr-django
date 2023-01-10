@@ -131,3 +131,5 @@ if not DEBUG:
 
 
 DOMAIN = os.getenv('DOMAIN', 'http://localhost:8000')
+
+KEY_CONVERTR_PATH = os.getenv('KEY_CONVERTR_PATH', '/usr/local/bin/key-convertr')

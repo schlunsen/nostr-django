@@ -6,6 +6,7 @@ from datetime import datetime
 class Nip05User(models.Model):
     name = models.CharField(max_length=100)
     pub_key = models.CharField(max_length=300)
+    hex_key = models.CharField(max_length=300, blank=True, null=True)
     relays = models.ManyToManyField("Relay", blank=True)
 
     def __str__(self):
@@ -52,7 +53,15 @@ class Payment(models.Model):
         
     def generate_user(self):
         if not Nip05User.objects.filter(name=self.username).count():
-            user = Nip05User.objects.create(name=self.username, pub_key=self.pub_key)
+            hex_key = self.pub_key
+            
+            if 'npub' in self.pub_key:
+                from .utils import convert_bech32_to_hex
+                hex_key = convert_bech32_to_hex(self.pub_key)
+                user = Nip05User.objects.create(name=self.username, pub_key=self.pub_key, hex_key=hex_key)
+            else:
+                user = Nip05User.objects.create(name=self.username, hex_key=hex_key)
+            
 
     def confirm_payment(self):
         wallet = LNDHubWallet(self.wallet.wallet_export)

@@ -11,6 +11,7 @@ class Nip05UserViewSet(viewsets.ModelViewSet, mixins.RetrieveModelMixin, mixins.
     queryset = Nip05User.objects.all()
     serializer_class = Nip05UserSerializer
     lookup_field = 'name'
+    
 
 
 @csrf_exempt
@@ -45,7 +46,7 @@ def well_known(request):
 
     names_dict = {}
     for u in users:
-        names_dict[u.name] = u.pub_key
+        names_dict[u.name] = u.hex_key or u.pub_key
 
     data = {
         "names": names_dict
@@ -54,7 +55,7 @@ def well_known(request):
     if name and users:
 
         data['relays'] = {
-            users.first().pub_key: [x.url for x in users.first().relays.all()]
+            users.first().hex_key: [x.url for x in users.first().relays.all()]
 
         }
     return JsonResponse(data, safe=False)
