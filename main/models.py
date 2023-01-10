@@ -70,7 +70,6 @@ class Payment(models.Model):
         for invoice in invoices:
             if invoice['pay_req'] == self.lnurl and invoice['ispaid']:
                 self.paid_at = datetime.now()
-                self.refresh_from_db()
                 self.save()
                 self.generate_user()
                 return
