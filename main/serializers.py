@@ -1,8 +1,18 @@
 from rest_framework import serializers
 
 
-from .models import Nip05User, Relay
+from .models import Nip05User, Relay, Card, BackCard
 
+class CardSerializer(serializers.ModelSerializer):
+    back_card = serializers.SerializerMethodField()
+    
+    def get_back_card(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.back_card.image.url)
+        
+    class Meta:
+        model = Card
+        fields = ['name', 'image', 'back_card']
 
 class Nip05UserSerializer(serializers.ModelSerializer):
     relays = serializers.SerializerMethodField()

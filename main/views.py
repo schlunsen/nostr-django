@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.http import JsonResponse
-from .models import Nip05User, Wallet, Payment
-from .serializers import Nip05UserSerializer
+from .models import Nip05User, Wallet, Payment, Card, BackCard
+from .serializers import Nip05UserSerializer, CardSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
@@ -12,6 +12,10 @@ class Nip05UserViewSet(viewsets.ModelViewSet, mixins.RetrieveModelMixin, mixins.
     serializer_class = Nip05UserSerializer
     lookup_field = 'name'
     
+class CardViewSet(viewsets.ModelViewSet, mixins.RetrieveModelMixin, mixins.ListModelMixin):
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
+    lookup_field = 'id'
 
 
 @csrf_exempt

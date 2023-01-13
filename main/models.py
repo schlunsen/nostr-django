@@ -90,4 +90,5 @@ class Card(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(Nip05User, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.FileField(upload_to='cards', blank=True, null=True)
+    back_card = models.ForeignKey(BackCard, on_delete=models.SET_NULL, blank=True, null=True)
     tags = TaggableManager()
