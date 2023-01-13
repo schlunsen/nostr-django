@@ -3,3 +3,4 @@ djangorestframework
 django-extensions
 lndhub
 django-cors-headers
+django-taggit

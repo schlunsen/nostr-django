@@ -78,3 +78,16 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.username
+
+from taggit.managers import TaggableManager
+
+
+class BackCard(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    image = models.FileField(upload_to='cards', blank=True, null=True)
+
+class Card(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    user = models.ForeignKey(Nip05User, on_delete=models.SET_NULL, blank=True, null=True)
+    image = models.FileField(upload_to='cards', blank=True, null=True)
+    tags = TaggableManager()

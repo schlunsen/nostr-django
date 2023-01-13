@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Nip05User, Relay, Payment, Wallet
+from .models import Nip05User, Relay, Payment, Wallet, Card, BackCard
 
 class Nip05UserAdmin(admin.ModelAdmin):
     list_display = ('name', 'pub_key','_relays')
@@ -15,4 +15,6 @@ class PaymentAdmin(admin.ModelAdmin):
 admin.site.register(Wallet)
 admin.site.register(Nip05User, Nip05UserAdmin)
 admin.site.register(Relay)
+admin.site.register(Card)
+admin.site.register(BackCard)
 admin.site.register(Payment, PaymentAdmin)

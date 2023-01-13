@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'taggit',
     'rest_framework',
     'django_extensions',
-    'main'
+    'main',
+    
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,7 @@ if not DEBUG:
 DOMAIN = os.getenv('DOMAIN', 'http://localhost:8000')
 
 KEY_CONVERTR_PATH = os.getenv('KEY_CONVERTR_PATH', '/usr/local/bin/key-convertr')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
