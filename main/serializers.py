@@ -7,8 +7,9 @@ class CardSerializer(serializers.ModelSerializer):
     back_card = serializers.SerializerMethodField()
     
     def get_back_card(self, obj):
-        request = self.context.get('request')
-        return request.build_absolute_uri(obj.back_card.image.url)
+        if getattr(obj.back_card, 'image'):    
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.back_card.image.url)
         
     class Meta:
         model = Card
