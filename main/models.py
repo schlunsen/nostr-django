@@ -84,7 +84,7 @@ from taggit.managers import TaggableManager
 
 class BackCard(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
-    image = models.FileField(upload_to='cards', blank=True, null=True)
+    image = models.FileField(upload_to='back_cards', blank=True, null=True)
 
 class Card(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
