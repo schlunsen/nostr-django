@@ -8,6 +8,9 @@ class Nip05User(models.Model):
     pub_key = models.CharField(max_length=300)
     hex_key = models.CharField(max_length=300, blank=True, null=True)
     relays = models.ManyToManyField("Relay", blank=True)
+    cards = models.ManyToManyField("Card", blank=True)
+    
+    
 
     def __str__(self):
         return self.name
@@ -91,4 +94,4 @@ class Card(models.Model):
     user = models.ForeignKey(Nip05User, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.FileField(upload_to='cards', blank=True, null=True)
     back_card = models.ForeignKey(BackCard, on_delete=models.SET_NULL, blank=True, null=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
