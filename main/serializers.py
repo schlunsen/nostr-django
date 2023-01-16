@@ -9,7 +9,8 @@ class CardSerializer(serializers.ModelSerializer):
     def get_back_card(self, obj):
         if obj.back_card and getattr(obj.back_card, 'image'):    
             request = self.context.get('request')
-            return request.build_absolute_uri(obj.back_card.image.url)
+            if request:
+                return request.build_absolute_uri(obj.back_card.image.url)
         
     class Meta:
         model = Card
@@ -19,7 +20,7 @@ class Nip05UserSerializer(serializers.ModelSerializer):
     relays = serializers.SerializerMethodField()
     cards = serializers.SerializerMethodField()
     
-    def cards(self, obj):
+    def get_cards(self, obj):
         return CardSerializer([x for x in obj.cards.all()], many=True).data
     
     def get_relays(self, obj):
