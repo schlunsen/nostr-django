@@ -20,7 +20,7 @@ class Nip05UserSerializer(serializers.ModelSerializer):
     cards = serializers.SerializerMethodField()
     
     def cards(self, obj):
-        return CardSerializer(obj.cards.all(), many=True).data
+        return CardSerializer([x for x in obj.cards.all()], many=True).data
     
     def get_relays(self, obj):
         return RelaySerializer(obj.relays.all(), many=True).data
