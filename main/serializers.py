@@ -17,9 +17,9 @@ class CardSerializer(serializers.ModelSerializer):
 
 class Nip05UserSerializer(serializers.ModelSerializer):
     relays = serializers.SerializerMethodField()
-    cards = serializers.SerializerMethodField()
+    my_cards = serializers.SerializerMethodField()
     
-    def cards(self, obj):
+    def my_cards(self, obj):
         return CardSerializer([x for x in obj.cards.all()], many=True).data
     
     def get_relays(self, obj):
@@ -27,7 +27,7 @@ class Nip05UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Nip05User
-        fields = ['name', 'pub_key', 'relays', 'cards']
+        fields = ['name', 'pub_key', 'relays', 'my_cards']
 
 
 class RelaySerializer(serializers.ModelSerializer):
