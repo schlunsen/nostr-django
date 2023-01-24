@@ -10,6 +10,10 @@ class Nip05User(models.Model):
     relays = models.ManyToManyField("Relay", blank=True)
     cards = models.ManyToManyField("Card", blank=True)
     
+    bio = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    hook_line = models.CharField(max_length=200, blank=True, null=True)
+    
     
 
     def __str__(self):
