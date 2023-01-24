@@ -28,7 +28,7 @@ class Nip05UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Nip05User
-        fields = ['name', 'pub_key', 'relays', 'cards']
+        fields = ['name', 'pub_key', 'relays', 'cards', 'bio', 'city', 'hook_line']
 
 
 class RelaySerializer(serializers.ModelSerializer):
