@@ -15,8 +15,9 @@ SECRET_KEY = 'django-insecure-bhq09m=rarnt0qf#*)9t8)-1yi(*jtdkm48-o-nh--&5(oj2@p
 DEBUG = os.getenv('DEBUG', '1') == '1'
 
 DOMAIN = os.getenv('DOMAIN', 'http://localhost:8000')
-ALLOWED_HOSTS = ['{}'.format(DOMAIN),]
+ALLOWED_HOSTS = ['{}'.format(DOMAIN), 'https://localhost:3000']
 CSRF_TRUSTED_ORIGINS = ['https://{}'.format(DOMAIN),]
+USE_X_FORWARDED_HOST = True
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
